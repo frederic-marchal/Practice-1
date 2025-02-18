@@ -1,4 +1,4 @@
-package main.edu.ceu.programming.practices;
+package edu.ceu.programming.practices;
 
 public class Practice1 {
 /**

@@ -1,49 +1,43 @@
-# Variables
-SRC_DIR = src
+# Directories
+SRC_DIR = src/edu/ceu/programming
 BIN_DIR = bin
-JAR_NAME = AssignmentManager.jar
-MAIN_CLASS = application.StartProgram
+TEST_DIR = src/test/edu/ceu/programming
 JAVADOC_DIR = docs
-CENSUS_FILE = assignments.csv
+MAIN_CLASS = edu.ceu.programming.Practice1Main
 
-# List of all Java files in the source directory
-SOURCES := $(shell find $(SRC_DIR) -name "*.java")
-CLASSPATH = .
+# Java compiler settings
+JAVAC = javac
+JAVA = java
+JFLAGS = -d $(BIN_DIR)
 
-# Default target to compile and create the JAR
-all: compile jar javadoc
+# Finding Java source files
+SOURCES := $(shell find src -name "*.java")
 
-# Compile Java files and place the class files in the bin directory
+# Default target
+all: compile javadoc test
+
+# Compile Java files
 compile:
 	mkdir -p $(BIN_DIR)
-	javac -d $(BIN_DIR) -cp $(CLASSPATH) $(SOURCES)
-
-# Create the JAR file with manifest and classpath
-jar: compile
-	echo "Main-Class: $(MAIN_CLASS)" > manifest.txt
-	echo "Class-Path: ." >> manifest.txt
-	jar cfm $(JAR_NAME) manifest.txt -C $(BIN_DIR) .
-	rm manifest.txt
+	$(JAVAC) $(JFLAGS) $(SOURCES)
 
 # Generate Javadoc
 javadoc:
 	mkdir -p $(JAVADOC_DIR)
-	javadoc -d $(JAVADOC_DIR) -sourcepath $(SRC_DIR) -subpackages application:domain:presentation
+	javadoc -d $(JAVADOC_DIR) -sourcepath src -subpackages edu
 
-# Clean up compiled files and JAR
-clean:
-	rm -rf $(BIN_DIR) $(JAR_NAME) $(JAVADOC_DIR)
-
-# Run the program
+# Run the program (default with 1,000,000 iterations)
 run:
-	java -cp $(BIN_DIR):. $(MAIN_CLASS) $(ARGS)
+	java -cp $(BIN_DIR) $(MAIN_CLASS) 1000000
 
-# Run the program using the JAR file
-run-jar: jar
-	java -jar $(JAR_NAME) $(ARGS)
+# Run tests (JUnit 5 assumed)
+test:
+	mkdir -p $(BIN_DIR)
+	javac -d $(BIN_DIR) -cp $(BIN_DIR):lib/junit-5.8.1.jar $(TEST_DIR)/Practice1Test.java
+	java -cp $(BIN_DIR):lib/junit-5.8.1.jar org.junit.runner.JUnitCore edu.ceu.programming.Practice1Test
 
-# Package additional files: README.md and LICENSE
-package: jar
-	cp README.md LICENSE $(JAR_NAME)
+# Clean up compiled files and documentation
+clean:
+	rm -rf $(BIN_DIR) $(JAVADOC_DIR)
 
-.PHONY: all compile jar javadoc clean run package
+.PHONY: all compile javadoc run test clean

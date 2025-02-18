@@ -1,77 +1,68 @@
-# Practice-1
+# Monte Carlo PI Approximation
 
 ## Overview
-This project is a Java program that manages a catalog of assignments, allowing users to add, modify, and remove assignments.
+This project estimates the value of π using the Monte Carlo method in Java. The Monte Carlo method uses random sampling to approximate numerical results, and in this case, it is used to estimate the value of π by simulating random points in a unit square.
 
 ## Table of Contents
-
-- [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Project Structure](#project-structure)
 - [License](#license)
-- [UML Diagram](#uml-diagram)
-
-## Introduction
-
-The `AssignmentManager` project is a simple Java program that allows users to manage assignments with details such as name, description, deadline, and priority.
 
 ## Installation
-
 ### Prerequisites
 - Java 11+
 - Git
 
 ### Steps
-
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/frederic-marchal/AssignmentManager.git
-    ```
+   ```bash
+   git clone https://github.com/frederic-marchal/Practice-1
+   cd Practice-1
+   ```
 
-2. Navigate to the project directory:
-    ```bash
-    cd AssignmentManager
-    ```
+2. Compile the project:
+   ```bash
+   make compile
+   ```
 
-3. Compile the Java files into the `bin` directory using the Makefile:
-    ```bash
-    make compile
-    ```
-
-4. Package the application into a JAR file:
-    ```bash
-    make jar
-    ```
-
-5. Generate Javadoc documentation:
-    ```bash
-    make javadoc
-    ```
+3. Generate Javadoc documentation:
+   ```bash
+   make javadoc
+   ```
 
 ## Usage
-
-To run the application from the compiled classes:
-
+To run the program and approximate the value of π:
 ```bash
 make run
 ```
-
-To run the application using the JAR file:
-
+By default, this will run with `1,000,000` iterations. To run with a custom number of iterations, you can manually execute:
 ```bash
-make run-jar
+java -cp bin edu.ceu.programming.Practice1Main 5000000
+```
+(replacing `5000000` with any desired number of iterations).
+
+## Project Structure
+```
+Practice-1/
+│── LICENSE
+│── Makefile
+│── README.md
+│── bin/  # Compiled Java classes
+│── docs/  # Javadoc documentation
+│── src/
+│   ├── edu/
+│   │   └── ceu/
+│   │       └── programming/
+│   │           ├── Practice1Main.java
+│   │           └── practices/
+│   │               └── Practice1.java
+│   └── test/
+│       └── edu/
+│           └── ceu/
+│               └── programming/
+│                   └── Practice1Test.java
 ```
 
-### Example Commands
-
-- **Add Assignment**: Follow the instructions to input assignment details.
-- **View Assignments**: Displays all current assignments.
-- **Edit or Delete Assignments**: Select an assignment by index to edit or delete it.
-
 ## License
-
 This project is licensed under the Apache License 2.0. See the `LICENSE` file for more details.
-
-## UML Diagram
-
-![UML Diagram](AssignmentManagerUML.png)
