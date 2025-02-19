@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"edu.ceu.programming.practices","l":"Practice1"},{"p":"edu.ceu.programming","l":"Practice1Main"}];updateSearchResults();
